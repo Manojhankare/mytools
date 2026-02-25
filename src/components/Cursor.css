@@ -1,0 +1,129 @@
+/* Global Cursor Hiding */
+@media (pointer: fine) {
+
+    body,
+    a,
+    button,
+    [role="button"],
+    .glass-card {
+        cursor: none !important;
+    }
+}
+
+.cursor-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    z-index: 100001;
+}
+
+/* 1. FOUNTAIN PEN */
+.cursor-pen-nib-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.cursor-pen-nib {
+    position: relative;
+    filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.6));
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-origin: top center;
+    transform: scale(0.65) rotate(-15deg);
+}
+
+.hovering .cursor-pen-nib {
+    filter: drop-shadow(0 0 15px #22d3ee);
+    transform: scale(0.8) rotate(-5deg);
+}
+
+.nib-point {
+    filter: drop-shadow(0 0 5px #fff);
+    animation: point-glow 1s infinite alternate;
+}
+
+@keyframes point-glow {
+    from {
+        opacity: 0.7;
+        r: 1.5;
+    }
+
+    to {
+        opacity: 1;
+        r: 2.2;
+    }
+}
+
+/* 2. ORBITAL */
+.cursor-orbital .dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #22d3ee;
+}
+
+.cursor-orbital .ring {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid rgba(34, 211, 238, 0.6);
+    border-radius: 50%;
+    transition: width 0.3s, height 0.3s;
+}
+
+.hovering .cursor-orbital .ring {
+    width: 50px;
+    height: 50px;
+    border-color: #22d3ee;
+    background: rgba(34, 211, 238, 0.1);
+}
+
+/* 3. CROSSHAIR */
+.cursor-crosshair .dot {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.cursor-crosshair .line {
+    position: absolute;
+    background: #22d3ee;
+    box-shadow: 0 0 8px rgba(34, 211, 238, 0.5);
+}
+
+.cursor-crosshair .line-v {
+    width: 1px;
+    height: 24px;
+    left: 0;
+    top: -12px;
+    transform: translateX(-50%);
+}
+
+.cursor-crosshair .line-h {
+    width: 24px;
+    height: 1px;
+    left: -12px;
+    top: 0;
+    transform: translateY(-50%);
+}
+
+.hovering .cursor-crosshair .line {
+    height: 32px;
+    width: 32px;
+}
+
+.hovering .cursor-crosshair .line-v {
+    width: 1px;
+}
+
+.hovering .cursor-crosshair .line-h {
+    height: 1px;
+}
