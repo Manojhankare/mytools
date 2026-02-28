@@ -20,9 +20,14 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
 
                 <div className="hidden md:flex items-center gap-6">
                     <nav className="flex items-center gap-6 text-sm font-medium text-slate-400">
-                        <a href="#" className="hover:text-cyan-400 transition-colors">Documentation</a>
-                        <a href="#" className="hover:text-cyan-400 transition-colors">Support</a>
-                        <a href="#" className="px-4 py-2 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 hover:bg-cyan-500/20 transition-all">
+                        {/* <a href="#" className="hover:text-cyan-400 transition-colors">Documentation</a> */}
+                        <a href="https://manojhankare.in" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">Support</a>
+                        <a
+                            href="https://github.com/manojhankare/mytools"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-4 py-2 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 hover:bg-cyan-500/20 transition-all"
+                        >
                             GitHub
                         </a>
                     </nav>
