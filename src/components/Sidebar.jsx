@@ -1,7 +1,7 @@
 import React from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronsLeft, ChevronsRight } from 'lucide-react';
 
-const Sidebar = ({ tools, activeTool, setActiveTool, isOpen, setIsOpen }) => {
+const Sidebar = ({ tools, activeTool, handleSetActiveTool, isOpen, setIsOpen }) => {
     return (
         <>
             {/* Mobile Overlay */}
@@ -13,49 +13,55 @@ const Sidebar = ({ tools, activeTool, setActiveTool, isOpen, setIsOpen }) => {
             )}
 
             <aside
-                className={`fixed left-0 top-0 bottom-0 z-45 bg-slate-950 border-r border-slate-800/50 transition-all duration-300 ease-in-out pt-24
-          ${isOpen ? 'translate-x-0 w-72' : '-translate-x-full lg:translate-x-0 lg:w-20'}
+                className={`fixed left-0 top-0 bottom-0 z-45 bg-slate-950/95 backdrop-blur-md border-r border-slate-800/50 transition-all duration-300 ease-in-out pt-20 flex flex-col
+          ${isOpen ? 'translate-x-0 w-60' : '-translate-x-full lg:translate-x-0 lg:w-16'}
         `}
             >
-                {/* Toggle Button for Desktop */}
-                <button
-                    onClick={() => setIsOpen(!isOpen)}
-                    className="absolute -right-3 top-28 w-6 h-6 bg-slate-800 border border-slate-700 rounded-full hidden lg:flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-400 transition-all z-50"
-                >
-                    {isOpen ? <ChevronLeft size={14} /> : <ChevronRight size={14} />}
-                </button>
+                {/* Sidebar Header with Toggle */}
+                <div className={`flex items-center px-3 py-3 border-b border-slate-800/30 ${isOpen ? 'justify-between' : 'justify-center'}`}>
+                    {isOpen && (
+                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Tools</span>
+                    )}
+                    <button
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="w-7 h-7 rounded-lg bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700/50 hover:border-cyan-400/30 hidden lg:flex items-center justify-center text-slate-400 hover:text-cyan-400 transition-all"
+                        title={isOpen ? 'Collapse' : 'Expand'}
+                    >
+                        {isOpen ? <ChevronsLeft size={14} /> : <ChevronsRight size={14} />}
+                    </button>
+                </div>
 
-                <div className="flex flex-col gap-2 px-4 h-full overflow-y-auto pb-8 scrollbar-hide">
+                {/* Tool List */}
+                <div className="flex flex-col gap-0.5 px-2 py-2 flex-1 overflow-y-auto scrollbar-hide">
                     {tools.map((tool) => (
                         <button
                             key={tool.id}
                             onClick={() => {
-                                setActiveTool(tool.id);
+                                handleSetActiveTool(tool.id);
                                 if (window.innerWidth < 1024) setIsOpen(false);
                             }}
-                            className={`flex items-center gap-4 p-3 rounded-xl transition-all group relative
+                            className={`flex items-center gap-3 px-2.5 py-2 rounded-lg transition-all group relative
                 ${activeTool === tool.id
-                                    ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20'
-                                    : 'text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent'
+                                    ? 'bg-cyan-500/10 text-cyan-400'
+                                    : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200'
                                 }
               `}
                             title={!isOpen ? tool.name : ''}
                         >
-                            <div className={`p-2 rounded-lg transition-colors
+                            <div className={`shrink-0 p-1.5 rounded-md transition-colors
                 ${activeTool === tool.id ? 'bg-cyan-400/10' : 'group-hover:bg-slate-800'}
               `}>
-                                <tool.icon size={20} />
+                                <tool.icon size={16} />
                             </div>
 
-                            <div className={`flex flex-col items-start transition-opacity duration-200 whitespace-nowrap
-                ${isOpen ? 'opacity-100 w-auto' : 'opacity-0 w-0 pointer-events-none'}
+                            <span className={`font-medium text-sm transition-all duration-200 whitespace-nowrap
+                ${isOpen ? 'opacity-100 w-auto' : 'opacity-0 w-0 overflow-hidden pointer-events-none'}
               `}>
-                                <span className="font-bold text-sm leading-none">{tool.name}</span>
-                                <span className="text-[10px] text-slate-500 font-medium">{tool.id.toUpperCase()} TOOL</span>
-                            </div>
+                                {tool.name}
+                            </span>
 
                             {!isOpen && activeTool === tool.id && (
-                                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-cyan-400 rounded-r-full" />
+                                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-4 bg-cyan-400 rounded-r-full" />
                             )}
                         </button>
                     ))}

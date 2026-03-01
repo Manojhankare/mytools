@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --color-slate-950: #020617;
@@ -78,4 +79,96 @@ details>summary {
 
 details>summary::-webkit-details-marker {
   display: none;
+}
+
+/* Cyberpunk Typography Overrides */
+.prose {
+  --tw-prose-body: var(--color-slate-300);
+  --tw-prose-headings: #fff;
+  --tw-prose-lead: var(--color-slate-400);
+  --tw-prose-links: var(--color-cyan-400);
+  --tw-prose-bold: #fff;
+  --tw-prose-counters: var(--color-slate-400);
+  --tw-prose-bullets: var(--color-cyan-400);
+  --tw-prose-hr: var(--color-slate-800);
+  --tw-prose-quotes: var(--color-cyan-400);
+  --tw-prose-quote-borders: var(--color-cyan-400);
+  --tw-prose-captions: var(--color-slate-400);
+  --tw-prose-code: var(--color-cyan-400);
+  --tw-prose-pre-code: var(--color-slate-300);
+  --tw-prose-pre-bg: var(--color-slate-900);
+  --tw-prose-th-borders: var(--color-slate-700);
+  --tw-prose-td-borders: var(--color-slate-800);
+}
+
+.prose h1 {
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: #fff;
+  border-bottom: 2px solid var(--color-slate-800);
+  padding-bottom: 0.5rem;
+}
+
+.prose h2 {
+  color: var(--color-cyan-400);
+  margin-top: 2.5rem;
+  border-left: 4px solid var(--color-cyan-400);
+  padding-left: 1rem;
+}
+
+.prose h3 {
+  color: #fff;
+  font-weight: 700;
+}
+
+.prose code::before,
+.prose code::after {
+  content: "";
+}
+
+.prose code {
+  background-color: rgba(34, 211, 238, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-weight: 400;
+}
+
+.prose table {
+  font-size: 0.875rem;
+}
+
+.prose thead th {
+  color: var(--color-cyan-400);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Mermaid Sizing and Contrast Fixes */
+.mermaid-container {
+  min-height: 100px;
+  width: 100%;
+}
+
+.mermaid-container svg {
+  max-width: none !important;
+  height: auto !important;
+}
+
+/* Force dark theme readability in Mermaid diagrams */
+.mermaid-container .node label,
+.mermaid-container .node text,
+.mermaid-container .edgeLabel,
+.mermaid-container .cluster-label span {
+  color: #fff !important;
+  fill: #fff !important;
+  font-weight: 500 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8) !important;
+}
+
+.mermaid-container .node rect,
+.mermaid-container .node circle,
+.mermaid-container .node ellipse,
+.mermaid-container .node polygon,
+.mermaid-container .node path {
+  stroke-width: 1.5px !important;
 }
