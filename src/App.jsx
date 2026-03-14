@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { Analytics } from '@vercel/analytics/react'
+
 import Cursor from './components/Cursor'
 import Header from './components/Header'
 import Sidebar from './components/Sidebar'
@@ -173,6 +175,7 @@ function App() {
       </div>
 
       <Cursor />
+      <Analytics />
     </div>
   )
 }
