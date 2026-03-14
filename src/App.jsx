@@ -8,7 +8,9 @@ import JsonLint from './tools/JsonLint'
 import MdViewer from './tools/MdViewer'
 import PassGen from './tools/PassGen'
 import DiffCheck from './tools/DiffCheck'
-import { Braces, FileText, Lock, LayoutGrid, GitCompare, Wrench, Sparkles, ArrowRight, Github, Globe } from 'lucide-react'
+import Base64Tool from './tools/Base64Tool'
+import ColorPicker from './tools/ColorPicker'
+import { Braces, FileText, Lock, LayoutGrid, GitCompare, Wrench, Sparkles, ArrowRight, Github, Globe, Binary, Palette } from 'lucide-react'
 
 function App() {
   const [activeTool, setActiveTool] = useState('home')
@@ -28,7 +30,9 @@ function App() {
     { id: 'json', name: 'JSON Lint', icon: Braces, description: 'Validate and format JSON data' },
     { id: 'md', name: 'MD Viewer', icon: FileText, description: 'Live Markdown preview' },
     { id: 'pass', name: 'PassGen', icon: Lock, description: 'Secure password generator' },
-    { id: 'diff', name: 'Diff Check', icon: GitCompare, description: 'Securely compare text' }
+    { id: 'diff', name: 'Diff Check', icon: GitCompare, description: 'Securely compare text' },
+    { id: 'base64', name: 'Base64', icon: Binary, description: 'Encode or decode Base64' },
+    { id: 'color', name: 'Color Picker', icon: Palette, description: 'Color converter and picker' }
   ]
 
   const renderTool = () => {
@@ -37,6 +41,8 @@ function App() {
       case 'md': return <MdViewer isSidebarOpen={isSidebarOpen} />;
       case 'pass': return <PassGen />;
       case 'diff': return <DiffCheck />;
+      case 'base64': return <Base64Tool />;
+      case 'color': return <ColorPicker />;
       default: return null;
     }
   }
@@ -89,7 +95,7 @@ function App() {
           <h3 className="text-sm font-bold text-slate-300">More Tools Coming</h3>
         </div>
         <p className="text-slate-500 text-sm leading-relaxed">
-          This project is actively growing. Upcoming tools include a Base64 encoder, Color Picker, Regex Tester, UUID Generator, Lorem Ipsum Generator, and more. Stay tuned!
+          This project is actively growing. Upcoming tools include a Regex Tester, UUID Generator, Lorem Ipsum Generator, and more. Stay tuned!
         </p>
       </div>
 
@@ -140,24 +146,6 @@ function App() {
             ${isSidebarOpen ? 'lg:ml-60' : 'lg:ml-16'}
           `}>
             <div className="max-w-[1200px] mx-auto">
-              {activeTool !== 'home' && activeTool !== 'md' && (
-                <div className="mb-6 flex items-center justify-between animate-in fade-in slide-in-from-left-4 duration-500">
-                  <div>
-                    <h2 className="text-2xl font-black text-white uppercase tracking-tighter italic">
-                      {tools.find(t => t.id === activeTool)?.name}
-                    </h2>
-                    <p className="text-slate-400 text-sm mt-1">
-                      {tools.find(t => t.id === activeTool)?.description}
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => handleSetActiveTool('home')}
-                    className="text-cyan-400 hover:text-cyan-300 flex items-center gap-2 transition-all text-sm font-bold group"
-                  >
-                    <span className="group-hover:-translate-x-1 transition-transform">←</span> Back
-                  </button>
-                </div>
-              )}
 
               {activeTool === 'home' ? (
                 <HomePage />
