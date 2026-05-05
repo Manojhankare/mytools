@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 
 import Cursor from './components/Cursor'
 import Header from './components/Header'
@@ -164,6 +165,7 @@ function App() {
 
       <Cursor />
       <Analytics />
+      <SpeedInsights />
     </div>
   )
 }
